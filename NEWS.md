@@ -1,6 +1,7 @@
-# dqrng 0.0.4.1
+# dqrng 0.0.4.x
 
 * New RNG: Threefry from package 'sitmo'
+* Scalar RNGs: dqrng::uniform, dqrng::normal and dqrng::exponential
 * Unit-Tests for the C++ interface
 
 # dqrng 0.0.4

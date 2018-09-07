@@ -24,6 +24,9 @@
 
 namespace {
 dqrng::rng64_t rng = dqrng::generator();
+dqrng::uniform_distribution uniform{};
+dqrng::normal_distribution normal{};
+dqrng::exponential_distribution exponential{};
 }
 
 // [[Rcpp::interfaces(r, cpp)]]
@@ -64,24 +67,54 @@ void dqRNGkind(std::string kind, const std::string& normal_kind = "ignored") {
 // [[Rcpp::export(rng = false)]]
 Rcpp::NumericVector dqrunif(size_t n, double min = 0.0, double max = 1.0) {
   if(max / 2. - min / 2. > (std::numeric_limits<double>::max)() / 2.)
-     return 2. * dqrunif(n, min/2., max/2.);
+    return 2. * dqrunif(n, min/2., max/2.);
 
-  dqrng::uniform_distribution dist(min, max);
-  return dqrng::generate<dqrng::uniform_distribution, Rcpp::NumericVector>(n, rng, dist);
+  using parm_t = decltype(uniform)::param_type;
+  uniform.param(parm_t(min, max));
+  return dqrng::generate<dqrng::uniform_distribution, Rcpp::NumericVector>(n, rng, uniform);
+}
+
+//' @rdname dqrng-functions
+//' @export
+// [[Rcpp::export(rng = false)]]
+double dquniform(double min = 0.0, double max = 1.0) {
+  if(max / 2. - min / 2. > (std::numeric_limits<double>::max)() / 2.)
+    return 2. * dquniform(min/2., max/2.);
+
+  return uniform(*rng) * (max - min) + min;
 }
 
 //' @rdname dqrng-functions
 //' @export
 // [[Rcpp::export(rng = false)]]
 Rcpp::NumericVector dqrnorm(size_t n, double mean = 0.0, double sd = 1.0) {
-  dqrng::normal_distribution dist(mean, sd);
-  return dqrng::generate<dqrng::normal_distribution, Rcpp::NumericVector>(n, rng, dist);
+  using parm_t = decltype(normal)::param_type;
+  normal.param(parm_t(mean, sd));
+  return dqrng::generate<dqrng::normal_distribution, Rcpp::NumericVector>(n, rng, normal);
+}
+
+//' @rdname dqrng-functions
+//' @export
+// [[Rcpp::export(rng = false)]]
+double dqnormal(double mean = 0.0, double sd = 1.0) {
+  using parm_t = decltype(normal)::param_type;
+  return normal(*rng, parm_t(mean, sd));
 }
 
 //' @rdname dqrng-functions
 //' @export
 // [[Rcpp::export(rng = false)]]
 Rcpp::NumericVector dqrexp(size_t n, double rate = 1.0) {
-  dqrng::exponential_distribution dist(rate);
-  return dqrng::generate<dqrng::exponential_distribution, Rcpp::NumericVector>(n, rng, dist);
+  using parm_t = decltype(exponential)::param_type;
+  exponential.param(parm_t(rate));
+  return dqrng::generate<dqrng::exponential_distribution, Rcpp::NumericVector>(n, rng, exponential);
 }
+
+//' @rdname dqrng-functions
+//' @export
+// [[Rcpp::export(rng = false)]]
+double dqexponential(double rate = 1.0) {
+  using parm_t = decltype(exponential)::param_type;
+  return exponential(*rng, parm_t(rate));
+}
+

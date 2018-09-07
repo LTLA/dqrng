@@ -3,8 +3,11 @@
 \name{dqRNGkind}
 \alias{dqRNGkind}
 \alias{dqrunif}
+\alias{dquniform}
 \alias{dqrnorm}
+\alias{dqnormal}
 \alias{dqrexp}
+\alias{dqexponential}
 \alias{dqset.seed}
 \title{R interface}
 \usage{
@@ -12,9 +15,15 @@ dqRNGkind(kind, normal_kind = "ignored")
 
 dqrunif(n, min = 0, max = 1)
 
+dquniform(min = 0, max = 1)
+
 dqrnorm(n, mean = 0, sd = 1)
 
+dqnormal(mean = 0, sd = 1)
+
 dqrexp(n, rate = 1)
+
+dqexponential(rate = 1)
 
 dqset.seed(seed)
 }
@@ -38,7 +47,9 @@ dqset.seed(seed)
 \item{seed}{integer seed for the random number generator}
 }
 \value{
-\code{dqrunif}, \code{dqrnorm}, and \code{dqrexp} return a numeric vector of length \code{n}.
+\code{dqrunif}, \code{dqrnorm}, and \code{dqrexp} return a numeric
+ vector of length \code{n}. The scalar functions \code{dquniform},
+ \code{dqnormal}, and \code{dqexponential} return a numeric vector of length 1.
 }
 \description{
 The \code{dqrng} package provides several fast random number
@@ -46,7 +57,9 @@ The \code{dqrng} package provides several fast random number
   according to a uniform, normal and exponential distribution. These
   functions are modeled after the \code{base} functions
   \code{\link{set.seed}}, \code{\link{RNGkind}}, \code{\link{runif}},
-  \code{\link{rnorm}}, and \code{\link{rexp}}.
+  \code{\link{rnorm}}, and \code{\link{rexp}}. The scalar functions
+  \code{dquniform}, \code{dqnormal}, and \code{dqexponential} provide
+  short-hand versions when only a single random number is required.
 }
 \details{
 Supported RNG kinds:

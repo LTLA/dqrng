@@ -19,14 +19,32 @@ dqrunif <- function(n, min = 0.0, max = 1.0) {
 
 #' @rdname dqrng-functions
 #' @export
+dquniform <- function(min = 0.0, max = 1.0) {
+    .Call(`_dqrng_dquniform`, min, max)
+}
+
+#' @rdname dqrng-functions
+#' @export
 dqrnorm <- function(n, mean = 0.0, sd = 1.0) {
     .Call(`_dqrng_dqrnorm`, n, mean, sd)
 }
 
 #' @rdname dqrng-functions
 #' @export
+dqnormal <- function(mean = 0.0, sd = 1.0) {
+    .Call(`_dqrng_dqnormal`, mean, sd)
+}
+
+#' @rdname dqrng-functions
+#' @export
 dqrexp <- function(n, rate = 1.0) {
     .Call(`_dqrng_dqrexp`, n, rate)
+}
+
+#' @rdname dqrng-functions
+#' @export
+dqexponential <- function(rate = 1.0) {
+    .Call(`_dqrng_dqexponential`, rate)
 }
 
 # Register entry points for exported C++ functions

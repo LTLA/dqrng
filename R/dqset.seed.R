@@ -5,7 +5,9 @@
 #'   according to a uniform, normal and exponential distribution. These
 #'   functions are modeled after the \code{base} functions
 #'   \code{\link{set.seed}}, \code{\link{RNGkind}}, \code{\link{runif}},
-#'   \code{\link{rnorm}}, and \code{\link{rexp}}.
+#'   \code{\link{rnorm}}, and \code{\link{rexp}}. The scalar functions
+#'   \code{dquniform}, \code{dqnormal}, and \code{dqexponential} provide
+#'   short-hand versions when only a single random number is required.
 #'
 #' @param seed  integer seed for the random number generator
 #' @param kind  string specifying the RNG (see details)
@@ -17,8 +19,9 @@
 #' @param sd  standard deviation of the normal distribution
 #' @param rate  rate of the exponential distribution
 #'
-#' @return \code{dqrunif}, \code{dqrnorm}, and \code{dqrexp} return a numeric vector of length \code{n}.
-#'
+#' @return \code{dqrunif}, \code{dqrnorm}, and \code{dqrexp} return a numeric
+#'  vector of length \code{n}. The scalar functions \code{dquniform},
+#'  \code{dqnormal}, and \code{dqexponential} return a numeric vector of length 1.
 #' @details Supported RNG kinds:
 #' \describe{
 #'   \item{Mersenne-Twister}{The 64 bit variant of the well-known Mersenne-Twister,
