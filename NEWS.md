@@ -1,6 +1,7 @@
 # dqrng 0.0.4.1
 
 * New RNG: Threefry from package 'sitmo'
+* New functions `dqsample` and `dqsample.int` using an unbiased sampling algorithm
 * Unit-Tests for the C++ interface
 
 # dqrng 0.0.4

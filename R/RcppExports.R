@@ -29,6 +29,10 @@ dqrexp <- function(n, rate = 1.0) {
     .Call(`_dqrng_dqrexp`, n, rate)
 }
 
+dqsample_int <- function(m, n, replace = FALSE, probs = NULL) {
+    .Call(`_dqrng_dqsample_int`, m, n, replace, probs)
+}
+
 # Register entry points for exported C++ functions
 methods::setLoadAction(function(ns) {
     .Call('_dqrng_RcppExport_registerCCallable', PACKAGE = 'dqrng')
