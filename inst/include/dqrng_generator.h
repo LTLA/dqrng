@@ -21,12 +21,28 @@
 #include <cstdint>
 #include <chrono>
 #include <memory>
-#include <random>
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/random_device.hpp>
 #include <type_traits>
+
+// explicit specialisations while https://github.com/boostorg/random/pull/24 is not merged
+namespace boost {
+namespace random {
+/** Returns the smallest value that the generator can produce. */
+template <>
+BOOST_CONSTEXPR mt19937_64::result_type mt19937_64::min BOOST_PREVENT_MACRO_SUBSTITUTION ()
+{ return 0; }
+/** Returns the largest value that the generator can produce. */
+template <>
+BOOST_CONSTEXPR mt19937_64::result_type mt19937_64::max BOOST_PREVENT_MACRO_SUBSTITUTION ()
+{ return boost::low_bits_mask_t<64>::sig_bits; }
+} // random
+} // boost
+
 
 namespace dqrng {
 // conservative default
-using default_64bit_generator = std::mt19937_64;
+using default_64bit_generator = boost::random::mt19937_64;
 
 class random_64bit_generator {
 public:
@@ -71,9 +87,8 @@ generator (uint64_t seed) {
 
 template<typename RNG = default_64bit_generator>
 rng64_t generator() {
-  uint64_t seed = std::random_device{}();
-  uint64_t time = std::chrono::system_clock::now().time_since_epoch().count();
-  seed = seed | time;
+  uint64_t seed = boost::random::random_device{}() |
+    std::chrono::system_clock::now().time_since_epoch().count();
   return generator<RNG>(seed);
 }
 } // namespace dqrng

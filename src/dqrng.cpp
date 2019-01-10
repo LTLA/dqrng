@@ -45,7 +45,7 @@ void dqRNGkind(std::string kind, const std::string& normal_kind = "ignored") {
   if (kind == "default") {
     rng =  dqrng::generator(seed);
   } else if (kind == "mersenne-twister") {
-    rng =  dqrng::generator<std::mt19937_64>(seed);
+    rng =  dqrng::generator<boost::random::mt19937_64>(seed);
   } else if (kind == "xoroshiro128+") {
     rng =  dqrng::generator<dqrng::xoroshiro128plus>(seed);
   } else if (kind == "xoshiro256+") {

@@ -9,6 +9,12 @@ Copyright: 2016, 2018 David Blackman and Sebastiano Vigna
 License: CC0
 URL: http://xoshiro.di.unimi.it/.
 
+File: src/random_device.cpp
+Copyright:  2000 Jens Maurer
+            2010-2011 Steven Watanabe
+License: Boost Software License
+URL: https://github.com/boostorg/random
+
 Files: *
 Copyright: 2018 Ralf Stubner (daqana GmbH)
 License: AGPL-3

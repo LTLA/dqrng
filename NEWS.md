@@ -1,6 +1,7 @@
-# dqrng 0.0.4.1
+# dqrng 0.0.4.2
 
 * New RNG: Threefry from package 'sitmo'
+* Replace `random` header from C++11 with `boost.random` 
 * Unit-Tests for the C++ interface
 
 # dqrng 0.0.4
