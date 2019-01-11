@@ -1,7 +1,9 @@
 # dqrng 0.0.4.2
 
 * New RNG: Threefry from package 'sitmo'
-* Replace `random` header from C++11 with `boost.random` 
+* Usage of the `random` header from C++11 is discouraged for R extensions: 
+    * Replace `std::mt19937_64` with `boost::random::mt19937_64`
+    * Remove `std::random_device` using a default seed base on time only
 * Unit-Tests for the C++ interface
 
 # dqrng 0.0.4
