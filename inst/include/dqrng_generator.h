@@ -22,7 +22,6 @@
 #include <chrono>
 #include <memory>
 #include <boost/random/mersenne_twister.hpp>
-#include <boost/random/random_device.hpp>
 #include <type_traits>
 
 // explicit specialisations while https://github.com/boostorg/random/pull/24 is not merged
@@ -87,8 +86,7 @@ generator (uint64_t seed) {
 
 template<typename RNG = default_64bit_generator>
 rng64_t generator() {
-  uint64_t seed = boost::random::random_device{}() |
-    std::chrono::system_clock::now().time_since_epoch().count();
+  uint64_t seed = std::chrono::system_clock::now().time_since_epoch().count();
   return generator<RNG>(seed);
 }
 } // namespace dqrng
